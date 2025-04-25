@@ -8,12 +8,15 @@
   <!-- ✅ Your Styles -->
   <link rel="stylesheet" href="styles.css">
 
-  <!-- Materialize (still here for cards/buttons/etc.) -->
+  <!-- Materialize CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
 
-  <!-- Fonts -->
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
     body {
@@ -24,11 +27,52 @@
       padding: 0;
     }
 
-    /* Centering the photo */
+    header h1 {
+      text-align: center;
+      font-family: 'Fredericka the Great', cursive;
+      font-size: 3em;
+      color: #003366;
+      margin-top: 20px;
+    }
+
+    nav {
+      background-color: #003366;
+      padding: 10px 0;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-size: 1em;
+      padding: 10px 20px;
+    }
+
+    nav ul li a:hover {
+      background-color: #C9ADA7;
+      border-radius: 5px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
     .profile-img-container {
       display: flex;
       justify-content: center;
-      align-items: center;
       margin-top: 40px;
     }
 
@@ -40,118 +84,54 @@
       border: 6px solid #4A4E69;
     }
 
-    /* Card Styling */
-    .card-panel {
-      border-radius: 12px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      background-color: #FFFFFF;
-    }
-
-    .btn {
-      border-radius: 8px;
-      font-size: 1.1em;
-      background-color: #9A8C98;
-    }
-
-    .btn:hover {
-      background-color: #C9ADA7;
-    }
-
-    footer {
-      background-color: transparent !important;
-      color: #22223B;
-      padding: 20px 0;
-      text-align: center;
-    }
-
-    header h1 {
-      text-align: center;
-      font-family: 'Fredericka the Great', cursive;
-      font-size: 3em;
-      color: #003366;
-      margin-top: 20px;
-    }
-
-    .profile-section {
-      margin-top: 40px;
-      text-align: center;
-    }
-
-    .profile-section h5 {
-      margin-top: 20px;
-    }
-
-    .intro-section {
-      margin-top: 30px;
-    }
-
-    .cta-section {
-      margin-top: 20px;
-      text-align: center;
-    }
-
-    /* ✅ Nav bar styling from you */
-    nav {
-      background-color: #003366;
-      padding: 10px 0;
-    }
-
-    nav ul {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
-    nav ul li {
-      list-style: none;
-      margin: 0 15px;
-    }
-
-    nav ul li a {
-      text-decoration: none;
-      color: white;
-      font-weight: normal;
-      font-size: 1em;
-      padding: 10px 20px;
-    }
-
-    nav ul li a:hover {
-      background-color: #C9ADA7;
-      border-radius: 5px;
-    }
-
-    /* Dashboard Styling */
     .dashboard {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
-      justify-content: center;
-      margin-top: 20px;
-      padding: 0 20px;
+      margin-top: 40px;
     }
 
-    .dashboard .card {
+    .left-column {
+      flex: 1 1 60%;
+    }
+
+    .right-column {
+      flex: 1 1 35%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .full-width {
+      flex: 1 1 100%;
+      margin-top: 40px;
+    }
+
+    .card {
       background-color: #FFFFFF;
       border-radius: 12px;
       padding: 20px;
-      width: 45%;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-      margin: 10px;
     }
 
-    .dashboard h2 {
+    .card h2 {
       margin-bottom: 1rem;
     }
 
-    /* Text Section Styling */
     .card p {
       font-size: 1.1em;
       color: #333;
     }
 
+    @media (max-width: 800px) {
+      .left-column, .right-column {
+        flex: 1 1 100%;
+      }
+    }
+
+    canvas {
+      max-width: 100%;
+    }
   </style>
 </head>
 
@@ -160,8 +140,6 @@
   <!-- Header -->
   <header>
     <h1>Charlotte's Dashboard</h1>
-
-    <!-- ✅ Clean, centered nav bar -->
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
@@ -171,45 +149,101 @@
         <li><a href="resume.html">Resume</a></li>
         <li><a href="summer-camp.html">Summer Camp</a></li>
         <li><a href="jquery.html">Casa On The Court</a></li>
-        <li><a href="dashboard.html">Dashboard</a></li> <!-- Dashboard added here -->
+        <li><a href="dashboard.html">Dashboard</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Dashboard Content -->
+  <!-- Main Container -->
   <div class="container">
-    <!-- Profile Image Section (Centered) -->
+
+    <!-- Profile Image -->
     <div class="profile-img-container">
       <a href="https://imgur.com/9Sm1XhE"><img src="https://i.imgur.com/9Sm1XhE.jpg" title="Charlotte's Photo" /></a>
     </div>
 
-    <!-- Dashboard Info Cards -->
+    <!-- Dashboard Grid -->
     <div class="dashboard">
 
-      <!-- Current Courses Card -->
-      <div class="card">
-        <h2>Current Courses</h2>
-        <p><strong>IMS 222 B:</strong> Intro to Interaction Design - A hands-on class about designing user experiences for digital interfaces.</p>
-        <p><strong>JRN 102 C:</strong> Precision Language for News - This class focuses on writing news stories with precision and clarity.</p>
-        <p><strong>MJF 105 A:</strong> Media, Culture, and You - An exploration of how media influences society and personal identity.</p>
-        <p><strong>MJF 146 A:</strong> Foundations of Production - A foundational course for learning media production techniques.</p>
-        <p><strong>SLM 273 A:</strong> Sport Communication & Media - A study of how communication functions in the sports world.</p>
+      <!-- Left Column -->
+      <div class="left-column">
+        <div class="card">
+          <h2>Current Courses</h2>
+          <p><strong>IMS 222 B:</strong> Intro to Interaction Design - A hands-on class about designing user experiences for digital interfaces.</p>
+          <p><strong>JRN 102 C:</strong> Precision Language for News - This class focuses on writing news stories with precision and clarity.</p>
+          <p><strong>MJF 105 A:</strong> Media, Culture, and You - An exploration of how media influences society and personal identity.</p>
+          <p><strong>MJF 146 A:</strong> Foundations of Production - A foundational course for learning media production techniques.</p>
+          <p><strong>SLM 273 A:</strong> Sport Communication & Media - A study of how communication functions in the sports world.</p>
+        </div>
       </div>
 
-      <!-- Recent Update Card -->
-      <div class="card">
-        <h2>Recent Update</h2>
-        <p><strong> I was chosen to be a UA for UNV101:</strong> I will be helping first-year students in the "I Am Miami" course, which focuses on reflection, self-assessment, and group discussions to help them integrate their personal, academic, and career goals.</p>
+      <!-- Right Column -->
+      <div class="right-column">
+        <div class="card">
+          <h2>Recent Update</h2>
+          <p><strong>I was chosen to be a UA for UNV101:</strong> I will be helping first-year students in the "I Am Miami" course, which focuses on reflection, self-assessment, and group discussions to help them integrate their personal, academic, and career goals.</p>
+        </div>
+        <div class="card">
+          <h2>Summer Plans</h2>
+          <p>I am continuing my summer camp, where I work with kids, and I am also taking on a nannying position for six kids.</p>
+        </div>
       </div>
 
-      <!-- Summer Plans Card -->
-      <div class="card">
-        <h2>Summer Plans</h2>
-        <p>I am continuing my summer camp, where I work with kids, and I am also taking on a nannying position for six kids.</p>
+      <!-- Full-Width Chart -->
+      <div class="full-width">
+        <div class="card">
+          <h2>Gender Representation in Sports-Related Fields</h2>
+          <canvas id="genderChart" height="100"></canvas>
+        </div>
       </div>
 
     </div>
   </div>
 
+  <!-- Chart Script -->
+  <script>
+    const ctx = document.getElementById('genderChart').getContext('2d');
+    const genderChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['2000', '2005', '2010', '2015', '2020', '2025'],
+        datasets: [
+          {
+            label: 'Women (%)',
+            data: [5, 7, 10, 13, 16, 18],
+            borderColor: '#C9ADA7',
+            backgroundColor: 'rgba(201, 173, 167, 0.2)',
+            fill: true,
+            tension: 0.3
+          },
+          {
+            label: 'Men (%)',
+            data: [95, 93, 90, 87, 84, 82],
+            borderColor: '#4A4E69',
+            backgroundColor: 'rgba(74, 78, 105, 0.2)',
+            fill: true,
+            tension: 0.3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top'
+          },
+          title: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100
+          }
+        }
+      }
+    });
+  </script>
 </body>
 </html>
